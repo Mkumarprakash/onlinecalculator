@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculator</title>
+    <style>
+    	.bg-1{
+    		background-color: lightgrey;
+    	}
+    	.darkmode{
+    		color: red;
+    		position: right;
+    		transform: translate(340%, -20%);
+    		border-radius: 20px 20px 20px 20px ;
+
+    	}
+    	.dark-mode {
+             background-color: #333333;
+             color: #ffffff;
+        }
+    
+        .calculator {
+            width: 350px;
+            background-color: darkgray;
+            border: 10px solid #ccc;
+            padding: 10px 0px 0px 10px;
+           margin-top: 0%;
+           margin-left: 30%;
+           border-radius: 10px 0px 10px 0px ;
+            animation: come-from-left 1s forwards;
+           animation: running-red-border 2s infinite linear;
+        }     
+
+        @keyframes running-red-border {
+            0% {
+                border-color: lightgoldenrodyellow;
+            }
+            50% {
+                border-color: transparent;
+                box-shadow: 0 0 5px 5px red;
+            }
+            100% {
+                border-color: lightgoldenrodyellow;
+                box-shadow: none;
+            }
+        }
+       
+        .display {
+            width: 88%;
+            height: 60px;
+            margin-bottom: 10px;
+            font-size: 36px;
+            text-align: right;
+            padding: 5px;
+            border: 10px solid #ccc;
+           background-color: white;
+           animation: running-color 2s infinite linear;
+        }
+
+        @keyframes running-color {
+            0% {
+                color: red;
+            }
+            25% {
+                color: blue;
+            }
+            50% {
+                color: green;
+            }
+            75% {
+                color: yellow;
+            }
+            100% {
+                color: red;
+            }
+        }
+        .button {
+            width: 58px;
+            height: 58px;
+            margin: 12px;
+            font-size: 28px;
+            background-color: lightcyan ;
+            border-radius: 5px 0px 5px 0px ;
+        animation: running-border 5s infinite linear;
+        }
+
+        @keyframes running-border {
+            0% {
+                border-color: #ff0000;
+            }
+            50% {
+                border-color: #00ff00;
+            }
+            100% {
+                border-color: #0000ff;
+            }
+        }
+     .button:hover{
+     	background-color: lightgrey;
+     }
+
+   .button-1{width: 58px;
+            height: 58px;
+            margin: 12px;
+            font-size: 28px;
+            background-color: #03e9f4 ;
+            border-radius: 5px 0px 5px 0px ;
+        animation: running-border 5s infinite linear;
+        }
+
+        @keyframes running-border {
+            0% {
+                border-color: #ff0000;
+            }
+            50% {
+                border-color: #00ff00;
+            }
+            100% {
+                border-color: #0000ff;
+            }
+        }
+        .button-2{
+        	width: 58px;
+            height: 58px;
+            margin: 12px;
+            font-size: 28px;
+            background-color: lightgoldenrodyellow ;
+            border-radius: 5px 0px 5px 0px ;
+        animation: running-border 5s infinite linear;
+        }
+
+        @keyframes running-border {
+            0% {
+                border-color: #ff0000;
+            }
+            50% {
+                border-color: #00ff00;
+            }
+            100% {
+                border-color: #0000ff;
+            }
+        }
+        
+
+    </style>
+</head>
+<body class="bg-1">
+	<div class="row">
+    <div class="calculator">
+    	<button class="darkmode" onclick="toggleDarkMode()">Dark </button>
+        <div class="display" id="display"></div>
+        <button class="button" onclick="appendToDisplay('7')">7</button>
+        <button class="button" onclick="appendToDisplay('8')">8</button>
+        <button class="button" onclick="appendToDisplay('9')">9</button>
+        <button class="button-1" onclick="appendToDisplay('+')">+</button>
+        <br>
+        <button class="button" onclick="appendToDisplay('4')">4</button>
+        <button class="button" onclick="appendToDisplay('5')">5</button>
+        <button class="button" onclick="appendToDisplay('6')">6</button>
+        <button class="button-1" onclick="appendToDisplay('-')">-</button>
+        <br>
+        <button class="button" onclick="appendToDisplay('1')">1</button>
+        <button class="button" onclick="appendToDisplay('2')">2</button>
+        <button class="button" onclick="appendToDisplay('3')">3</button>
+        <button class="button-1" onclick="appendToDisplay('*')">*</button>
+        <br>
+        <button class="button" onclick="appendToDisplay('0')">0</button>
+        <button class="button" onclick="appendToDisplay('.')">.</button>
+        <button class="button-2" onclick="backspace()">&#9003;</button>
+        <button class="button-1" onclick="appendToDisplay('/')">/</button>
+        
+        <br>
+        <button class="button" onclick="calculateSquareRoot()">√</button>
+        <button class="button" onclick="calculatePower()">x^2</button>
+        <button class="button" onclick="calculateFactorial()">!</button>
+        <button class="button-2" onclick="calculateResult()">=</button>
+        <br>
+        <button class="button" onclick="calculateSin()">sin</button>
+        <button class="button"onclick="calculateCos()">cos</button>
+        <button class="button" onclick="calculateTan()">tan</button>
+        <button class="button-2" onclick="clearDisplay()">C</button>
+    </div>
+</div>
+
+    <script>
+    function toggleDarkMode() {
+    var body = document.body;
+    body.classList.toggle("dark-mode");
+}
+        function appendToDisplay(value) {
+            document.getElementById('display').innerHTML += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').innerHTML = '';
+        }
+
+        function calculateResult() {
+            var display = document.getElementById('display').innerHTML;
+            var result = eval(display);
+            document.getElementById('display').innerHTML = result;
+        }
+
+
+
+function backspace() {
+            var display = document.getElementById('display');
+            display.innerText = display.innerText.slice(0, -1);
+        }
+
+         function calculateSquareRoot() {
+            var display = document.getElementById('display');
+            var number = parseFloat(display.innerText);
+            display.innerText = Math.sqrt(number);
+        }
+
+        function calculatePower() {
+            var display = document.getElementById('display');
+            var number = parseFloat(display.innerText);
+            display.innerText = Math.pow(number, 2);
+        }
+
+        function calculateFactorial() {
+            var display = document.getElementById('display');
+            var number = parseInt(display.innerText);
+            var factorial = 1;
+            for (var i = 1; i <= number; i++) {
+                factorial *= i;
+            }
+            display.innerText = factorial;
+        }
+
+        function calculateSin() {
+            var display = document.getElementById('display');
+            var number = parseFloat(display.innerText);
+            display.innerText = Math.sin(number * (Math.PI / 180));
+        }
+
+        function calculateCos() {
+            var display = document.getElementById('display');
+            var number = parseFloat(display.innerText);
+            display.innerText = Math.cos(number * (Math.PI / 180));
+        }
+
+        function calculateTan() {
+            var display = document.getElementById('display');
+            var number = parseFloat(display.innerText);
+            display.innerText = Math.tan(number * (Math.PI / 180));
+        }
+    </script>
+</body>
+</html>
